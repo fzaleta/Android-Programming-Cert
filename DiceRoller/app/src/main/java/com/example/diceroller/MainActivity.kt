@@ -3,7 +3,7 @@ package com.example.diceroller
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
-import android.widget.TextView
+import android.widget.ImageView
 
 //import android.widget.Toast
 
@@ -17,13 +17,26 @@ class MainActivity : AppCompatActivity() {
             // Toast.makeText(this, "Dice Rolled!", Toast.LENGTH_SHORT).show()
             rollDice()
         }
+
+        rollDice()
     }
 
     private fun rollDice() {
         val dice = Dice(6)
-        val diceRoll1 = dice.roll()
-        val resultTextView1: TextView = findViewById(R.id.textView)
-        diceRoll1.toString().also { resultTextView1.text = it }
+        val diceRoll = dice.roll()
+        val diceImage: ImageView = findViewById(R.id.imageView)
+        val drawableResource = when (diceRoll) {
+            1 -> R.drawable.dice_1
+            2 -> R.drawable.dice_2
+            3 -> R.drawable.dice_3
+            4 -> R.drawable.dice_4
+            5 -> R.drawable.dice_5
+            else -> R.drawable.dice_6
+        }
+
+        diceImage.setImageResource(drawableResource)
+        diceImage.contentDescription = diceRoll.toString()
+
     }
 }
 
